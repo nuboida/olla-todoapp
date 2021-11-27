@@ -12,39 +12,26 @@
       <label for="text_form">
         <div></div>
       </label>
-      <input type="text" name="text_form" id="text_form" placeholder="Create a new todo...">
+      <form [formGroup]="todoForm" (ngSubmit)="submitTodo(todoForm)">
+        <input
+          type="text"
+          name="text_form"
+          id="text_form"
+          placeholder="Create a new todo..."
+          formControlName="todo"
+          >
+      </form>
     </div>
     <section class="list_section">
       <ul>
-        <li>
+        <li *ngFor="let todo of (todos$ | async)">
           <label><div></div></label>
-          Complete online Javascript course
+          {{todo.title}}
         </li>
-        <li>
-          <label><div></div></label>
-          Jog around the park 3x
-        </li>
-        <li>
-          <label><div></div></label>
-          10 minutes meditation
-        </li>
-        <li>
-          <label><div></div></label>
-          Read for 1 hour
-        </li>
-        <li>
-          <label><div></div></label>
-          Pick up groceries
-        </li>
-        <li>
-          <label><div></div></label>
-          Complete Todo App on Frontend Mentor
-        </li>
-
       </ul>
     </section>
-    <footer class="footer">
-      <span class="todo-count"><strong>5</strong> items left</span>
+    <footer class="footer" *ngIf="noOfItems > 0">
+      <span class="todo-count"><strong>{{noOfItems}}</strong> items left</span>
       <ul>
         <li><a>All</a></li>
         <li><a>Active</a></li>
