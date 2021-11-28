@@ -18,3 +18,16 @@ export const toggleComplete = createAction(
 export const toggleAllComplete = createAction(
   '[App Component] Toggle All Completed'
 )
+
+export const updateAllComplete = createAction(
+  '[App Component] Update all complete',
+)
+
+export const deleteTodo = createAction(
+  '[App Component] Delete selected Todo',
+  props<{id: number}>()
+)
+
+export const clearAllCompleted = createAction(
+  '[App Component] Remove All Completed Todos',
+)

@@ -1,9 +1,9 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { addTodos, loadTodos, toggleAllComplete, toggleComplete } from './todoApp.actions';
+import { createReducer, on, Action, StateObservable } from '@ngrx/store';
+import { addTodos, clearAllCompleted, deleteTodo, loadTodos, toggleAllComplete, toggleComplete, updateAllComplete } from './todoApp.actions';
 import { TodoState, todoAdapter } from './app.state';
 
 export const initialState: TodoState = todoAdapter.getInitialState({
-  dark: false
+  completeAll: false
 });
 
 export const TodoReducer = createReducer(
@@ -33,4 +33,44 @@ export const TodoReducer = createReducer(
     }, state)
    }
  }),
+ on (toggleAllComplete, (state) => {
+   if (!state.completeAll) {
+     return {
+       ...state,
+       completeAll: true
+     }
+   } else {
+     return {
+       ...state,
+       completeAll: false
+     }
+   }
+ }),
+ on(updateAllComplete, (state) => {
+   if (state.completeAll) {
+     let updates: Array<any> = [];
+     state.ids.forEach((n) => {
+       updates.push({id: n, changes: {completed: true}})
+     })
+     return todoAdapter.updateMany(updates, state);
+   } else {
+    let updates: Array<any> = [];
+    state.ids.forEach((n) => {
+      updates.push({id: n, changes: {completed: false}})
+    })
+     return todoAdapter.updateMany(updates, state);
+   }
+ }),
+ on(deleteTodo, (state, {id}) => {
+   return todoAdapter.removeOne(id, state)
+ }),
+ on(clearAllCompleted, (state) => {
+   let ids: any = []
+   state.ids.forEach((id) => {
+    if (state.entities[id]?.completed === true) {
+      ids.push(id);
+    }
+  })
+    return todoAdapter.removeMany(ids, state)
+ })
 )

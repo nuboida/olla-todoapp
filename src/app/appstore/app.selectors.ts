@@ -15,6 +15,11 @@ export const getEntities = createSelector(
   (state) => state.entities
 )
 
+export const getAllCompleted = createSelector(
+  AppCore,
+  (state) => state.completeAll
+)
+
 export const getTodos = createSelector(
   getEntities,
   (entities) => Object.values(entities) as Todo[]
