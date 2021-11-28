@@ -4,7 +4,7 @@
   <main class="main">
     <header>
       <h1>TODO</h1>
-      <div>
+      <div (click)="toggledarkMode()">
         <img src="../assets/images/icon-moon.svg" />
       </div>
     </header>
@@ -24,8 +24,11 @@
     </div>
     <section class="list_section">
       <ul>
-        <li *ngFor="let todo of (todos$ | async)">
-          <label><div></div></label>
+        <li *ngFor="let todo of todos" [class]="todo.completed ? 'item_completed' : null">
+          <label><div (click)="toggleCompletion(todo.id)"  [class]="todo.completed ? 'complete_check' : null">
+            <img src="../assets/images/icon-check.svg" alt="check" *ngIf="todo.completed"/>
+            <input type="checkbox" class="toggle_complete" [formControl]="checkField" style="display:none;">
+          </div></label>
           {{todo.title}}
         </li>
       </ul>
@@ -33,7 +36,7 @@
     <footer class="footer" *ngIf="noOfItems > 0">
       <span class="todo-count"><strong>{{noOfItems}}</strong> items left</span>
       <ul>
-        <li><a>All</a></li>
+        <li><a style="color: cornflowerblue;">All</a></li>
         <li><a>Active</a></li>
         <li><a>Completed</a></li>
       </ul>

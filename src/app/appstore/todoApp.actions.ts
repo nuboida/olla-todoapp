@@ -9,3 +9,17 @@ export const addTodos = createAction(
   '[App Component] add a todo',
   props<{todo: Todo}>()
 )
+
+export const toggleComplete = createAction(
+  '[App Component] Toggle Completed',
+  props<{id: number}>()
+)
+
+export const toggleAllComplete = createAction(
+  '[App Component] Toggle All Completed'
+)
+
+export const toggleDarkMode = createAction(
+  '[App Component] Toggle Dark Mode',
+  props<{darkmode: boolean}>()
+)

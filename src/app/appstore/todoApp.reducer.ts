@@ -1,9 +1,9 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { addTodos, loadTodos } from './todoApp.actions';
+import { addTodos, loadTodos, toggleAllComplete, toggleComplete, toggleDarkMode } from './todoApp.actions';
 import { TodoState, todoAdapter } from './app.state';
 
 export const initialState: TodoState = todoAdapter.getInitialState({
-
+  dark: false
 });
 
 export const TodoReducer = createReducer(
@@ -15,5 +15,35 @@ export const TodoReducer = createReducer(
   }),
   on(addTodos, (state, {todo}) => {
     return todoAdapter.addOne(todo, state)
-  })
+  }),
+ on(toggleComplete, (state, {id}) => {
+   if (state.entities[id]?.completed === false) {
+     return todoAdapter.updateOne({
+       id: id,
+       changes: {
+         completed: true
+       }
+     }, state)
+   } else {
+     return todoAdapter.updateOne({
+      id: id,
+      changes: {
+        completed: false
+      }
+    }, state)
+   }
+ }),
+ on(toggleDarkMode, (state, {darkmode}) => {
+   if (darkmode) {
+     return {
+       ...state,
+       dark: false,
+     }
+   } else {
+     return {
+       ...state,
+       dark: true
+     }
+   }
+ })
 )
