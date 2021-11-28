@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getDarkMode, getTodos } from './appstore/app.selectors';
+import { getTodos } from './appstore/app.selectors';
 import { Todo } from './appstore/models/todoApp.model';
-import { addTodos, toggleComplete, toggleDarkMode } from './appstore/todoApp.actions';
+import { addTodos, toggleComplete } from './appstore/todoApp.actions';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,6 @@ import { addTodos, toggleComplete, toggleDarkMode } from './appstore/todoApp.act
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  darkmode$: Observable<boolean> = this.store.pipe(select(getDarkMode));
   darkMode: any;
   todoForm: FormGroup;
   checkField: FormControl;
@@ -30,9 +29,6 @@ export class AppComponent {
     this.todos$.subscribe((todo) => {
       this.todos = todo;
     });
-    this.darkmode$.subscribe((dark) => {
-      this.darkMode = dark
-    })
   }
 
   toggleCompletion(id: number) {
@@ -54,12 +50,8 @@ export class AppComponent {
   toggledarkMode() {
     if (this.darkMode === false) {
       this.darkMode = true;
-      this.store.dispatch(toggleDarkMode(this.darkMode))
-      console.log(this.darkMode);
     } else {
       this.darkMode = false;
-      this.store.dispatch(toggleDarkMode(this.darkMode));
-      console.log(this.darkMode);
     }
   }
 }

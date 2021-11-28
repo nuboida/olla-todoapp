@@ -15,11 +15,6 @@ export const getEntities = createSelector(
   (state) => state.entities
 )
 
-export const getDarkMode = createSelector(
-  AppCore,
-  (state) => state.dark
-)
-
 export const getTodos = createSelector(
   getEntities,
   (entities) => Object.values(entities) as Todo[]

@@ -1,16 +1,17 @@
-<section class="todoapp">
-  <section class="banner">
+<section [class]="darkMode ? 'todoapp_dark' : 'todoapp'" [style.backgroundColor]="darkMode ? '#000000e6' : 'white' ">
+  <section [class]="darkMode ? 'banner_dark' : 'banner'">
   </section>
   <main class="main">
     <header>
       <h1>TODO</h1>
       <div (click)="toggledarkMode()">
-        <img src="../assets/images/icon-moon.svg" />
+        <img src="../assets/images/icon-moon.svg" *ngIf="!darkMode" />
+        <img src="../assets/images/icon-sun.svg" *ngIf="darkMode" />
       </div>
     </header>
-    <div class="input_form">
+    <div class="input_form" [style.backgroundColor]="darkMode ? '#142328' : 'white' ">
       <label for="text_form">
-        <div></div>
+        <div [style.border]="darkMode ? '2px solid rgba(197, 195, 195, 0.363)' : '2px solid #0000003d' "></div>
       </label>
       <form [formGroup]="todoForm" (ngSubmit)="submitTodo(todoForm)">
         <input
@@ -19,13 +20,15 @@
           id="text_form"
           placeholder="Create a new todo..."
           formControlName="todo"
+          [style.backgroundColor]="darkMode ? '#142328' : 'white' "
+          [style.color]="darkMode ? '#ffffffdb' : 'black'"
           >
       </form>
     </div>
-    <section class="list_section">
-      <ul>
+    <section [class]="darkMode ? 'list_section_dark' : 'list_section'">
+      <ul [style.backgroundColor]="darkMode ? '#142328' : 'white'">
         <li *ngFor="let todo of todos" [class]="todo.completed ? 'item_completed' : null">
-          <label><div (click)="toggleCompletion(todo.id)"  [class]="todo.completed ? 'complete_check' : null">
+          <label><div (click)="toggleCompletion(todo.id)"  [class]="todo.completed ? 'complete_check' : null" [style.border]="darkMode ? '2px solid rgba(197, 195, 195, 0.363)' : '2px solid #0000003d' ">
             <img src="../assets/images/icon-check.svg" alt="check" *ngIf="todo.completed"/>
             <input type="checkbox" class="toggle_complete" [formControl]="checkField" style="display:none;">
           </div></label>
@@ -33,14 +36,14 @@
         </li>
       </ul>
     </section>
-    <footer class="footer" *ngIf="noOfItems > 0">
+    <footer [class]="darkMode ? 'footer_dark' : 'footer'" *ngIf="noOfItems > 0" [style.backgroundColor]="darkMode ? '#142328' : 'white'">
       <span class="todo-count"><strong>{{noOfItems}}</strong> items left</span>
       <ul>
         <li><a style="color: cornflowerblue;">All</a></li>
         <li><a>Active</a></li>
         <li><a>Completed</a></li>
       </ul>
-      <button type="button" class="clear_completed">Clear Completed</button>
+      <a>Clear Completed</a>
     </footer>
   </main>
 </section>

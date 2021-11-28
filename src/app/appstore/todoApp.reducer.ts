@@ -1,5 +1,5 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { addTodos, loadTodos, toggleAllComplete, toggleComplete, toggleDarkMode } from './todoApp.actions';
+import { addTodos, loadTodos, toggleAllComplete, toggleComplete } from './todoApp.actions';
 import { TodoState, todoAdapter } from './app.state';
 
 export const initialState: TodoState = todoAdapter.getInitialState({
@@ -33,17 +33,4 @@ export const TodoReducer = createReducer(
     }, state)
    }
  }),
- on(toggleDarkMode, (state, {darkmode}) => {
-   if (darkmode) {
-     return {
-       ...state,
-       dark: false,
-     }
-   } else {
-     return {
-       ...state,
-       dark: true
-     }
-   }
- })
 )

@@ -18,8 +18,3 @@ export const toggleComplete = createAction(
 export const toggleAllComplete = createAction(
   '[App Component] Toggle All Completed'
 )
-
-export const toggleDarkMode = createAction(
-  '[App Component] Toggle Dark Mode',
-  props<{darkmode: boolean}>()
-)
