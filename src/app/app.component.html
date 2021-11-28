@@ -1,3 +1,54 @@
-<div>
-  <h1>Todo list</h1>
-</div>
+<section [class]="darkMode ? 'todoapp_dark' : 'todoapp'" [style.backgroundColor]="darkMode ? '#000000e6' : 'white' ">
+  <section [class]="darkMode ? 'banner_dark' : 'banner'">
+  </section>
+  <main class="main">
+    <header>
+      <h1>TODO</h1>
+      <div (click)="toggledarkMode()">
+        <img src="../assets/images/icon-moon.svg" *ngIf="!darkMode" />
+        <img src="../assets/images/icon-sun.svg" *ngIf="darkMode" />
+      </div>
+    </header>
+    <div class="input_form" [style.backgroundColor]="darkMode ? '#142328' : 'white' ">
+      <label for="text_form">
+        <div [style.border]="darkMode ? '2px solid rgba(197, 195, 195, 0.363)' : '2px solid #0000003d'" (click)="toggleAllComplete()" [class]="completedAll ? 'allCompleted' : null">
+          <img src="../assets/images/icon-check.svg" *ngIf="completedAll" />
+        </div>
+      </label>
+      <form [formGroup]="todoForm" (ngSubmit)="submitTodo(todoForm)">
+        <input
+          type="text"
+          name="text_form"
+          id="text_form"
+          placeholder="Create a new todo..."
+          formControlName="todo"
+          [style.backgroundColor]="darkMode ? '#142328' : 'white' "
+          [style.color]="darkMode ? '#ffffffdb' : 'black'"
+          >
+      </form>
+    </div>
+    <section [class]="darkMode ? 'list_section_dark' : 'list_section'">
+      <ul [style.backgroundColor]="darkMode ? '#142328' : 'white'">
+        <li *ngFor="let todo of displayTodos" [class]="todo.completed ? 'item_completed' : null">
+          <label><div (click)="toggleCompletion(todo.id)"  [class]="todo.completed ? 'complete_check' : null" [style.border]="darkMode ? '2px solid rgba(197, 195, 195, 0.363)' : '2px solid #0000003d' ">
+            <img src="../assets/images/icon-check.svg" alt="check" *ngIf="todo.completed"/>
+            <input type="checkbox" class="toggle_complete" [formControl]="checkField" style="display:none;">
+          </div></label>
+          {{todo.title}}
+          <span class="delete_todo" (click)="deleteTodo(todo.id)">
+            <img src="../assets/images/icon-cross.svg" />
+          </span>
+        </li>
+      </ul>
+    </section>
+    <footer [class]="darkMode ? 'footer_dark' : 'footer'" *ngIf="noOfItems > 0" [style.backgroundColor]="darkMode ? '#142328' : 'white'">
+      <span class="todo-count"><strong>{{noOfItems}}</strong> items left</span>
+      <ul>
+        <li><a [style.color]="AllTodos ? '#0495fb' : 'inherit'" (click)="showAll()">All</a></li>
+        <li><a [style.color]="ActiveTodos ? '#0495fb' : 'inherit'" (click)="showActive()">Active</a></li>
+        <li><a [style.color]="CompletedTodos ? '#0495fb' : 'inherit'" (click)="showCompleted()">Completed</a></li>
+      </ul>
+      <a (click)="deleteAllComplete()">Clear Completed</a>
+    </footer>
+  </main>
+</section>
