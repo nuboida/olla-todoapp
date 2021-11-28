@@ -49,7 +49,7 @@ main {
     width: 450px;
   }
   @media screen  and (max-width: 450px) {
-    width: 370px;
+    width: 330px;
   }
 
 
@@ -74,7 +74,7 @@ main {
 
     label {
       .allCompleted {
-        background-color: blue;
+        background-image: linear-gradient(-32deg, #9d00ffc9, #004effbf);
         img {
           margin-top: 8px;
         }
@@ -220,6 +220,7 @@ main {
   a {
     cursor: pointer;
   }
+
   span {
     font-size: 0.7rem;
     margin-right: auto;
@@ -236,7 +237,7 @@ main {
       padding: 20px 10px;
       background-color: white;
       width: 68%;
-      padding-left: 104px;
+      padding-left: 92px;
       box-shadow: 5px 20px 43px -16px;
     }
     & li {
@@ -259,7 +260,7 @@ main {
 }
 
 .complete_check {
-  background-color: blue;
+  background-image: linear-gradient(-32deg, #9d00ffc9, #004effbf);
 }
 
 .footer_dark {
@@ -289,7 +290,7 @@ main {
       padding: 20px 10px;
       background-color: rgb(20, 35, 40);
       width: 68%;
-      padding-left: 104px;
+      padding-left: 92px;
     }
     & li {
       margin-right: 15px;

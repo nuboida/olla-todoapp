@@ -5,14 +5,14 @@
     <header>
       <h1>TODO</h1>
       <div (click)="toggledarkMode()">
-        <img src="../assets/images/icon-moon.svg" *ngIf="!darkMode" />
-        <img src="../assets/images/icon-sun.svg" *ngIf="darkMode" />
+        <img src="assets/images/icon-moon.svg" *ngIf="!darkMode" />
+        <img src="assets/images/icon-sun.svg" *ngIf="darkMode" />
       </div>
     </header>
     <div class="input_form" [style.backgroundColor]="darkMode ? '#142328' : 'white' ">
-      <label for="text_form">
+      <label for="text_form" [style.display]="displayTodos.length < 1 ? 'none' : 'block'">
         <div [style.border]="darkMode ? '2px solid rgba(197, 195, 195, 0.363)' : '2px solid #0000003d'" (click)="toggleAllComplete()" [class]="completedAll ? 'allCompleted' : null">
-          <img src="../assets/images/icon-check.svg" *ngIf="completedAll" />
+          <img src="assets/images/icon-check.svg" *ngIf="completedAll" />
         </div>
       </label>
       <form [formGroup]="todoForm" (ngSubmit)="submitTodo(todoForm)">
@@ -31,12 +31,12 @@
       <ul [style.backgroundColor]="darkMode ? '#142328' : 'white'">
         <li *ngFor="let todo of displayTodos" [class]="todo.completed ? 'item_completed' : null">
           <label><div (click)="toggleCompletion(todo.id)"  [class]="todo.completed ? 'complete_check' : null" [style.border]="darkMode ? '2px solid rgba(197, 195, 195, 0.363)' : '2px solid #0000003d' ">
-            <img src="../assets/images/icon-check.svg" alt="check" *ngIf="todo.completed"/>
+            <img src="assets/images/icon-check.svg" alt="check" *ngIf="todo.completed"/>
             <input type="checkbox" class="toggle_complete" [formControl]="checkField" style="display:none;">
           </div></label>
           {{todo.title}}
           <span class="delete_todo" (click)="deleteTodo(todo.id)">
-            <img src="../assets/images/icon-cross.svg" />
+            <img src="assets/images/icon-cross.svg" />
           </span>
         </li>
       </ul>
