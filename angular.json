@@ -107,5 +107,8 @@
       }
     }
   },
-  "defaultProject": "todoapp"
+  "defaultProject": "todoapp",
+  "cli": {
+    "analytics": false
+  }
 }
