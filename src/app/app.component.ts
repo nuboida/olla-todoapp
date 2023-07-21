@@ -68,7 +68,6 @@ export class AppComponent {
   toggleAllComplete() {
     this.store.dispatch(toggleAllComplete());
     this.store.dispatch(updateAllComplete());
-    console.log(this.completedAll);
   }
 
   showAll() {
@@ -83,7 +82,8 @@ export class AppComponent {
     this.AllTodos = false;
     this.displayTodos = this.todos.filter((items: any) => {
       return items.completed === false;
-    })
+    });
+    this.noOfItems = this.displayTodos.length;
   }
   showCompleted() {
     this.CompletedTodos = true;
@@ -91,7 +91,8 @@ export class AppComponent {
     this.AllTodos = false;
     this.displayTodos = this.todos.filter((items: any) => {
       return items.completed === true
-    })
+    });
+    this.noOfItems = this.displayTodos.length;
   }
   deleteTodo(id: number) {
     this.store.dispatch(deleteTodo({id}))
