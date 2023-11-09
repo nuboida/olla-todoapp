@@ -1,15 +1,56 @@
 .todoapp {
   padding-bottom: 100px;
+  height: 100vh;
+  background-color: white;
 }
+
+.todoapp_dark {
+  color: #bdbcbc;
+  height: 100vh;
+  padding-bottom: 100px;
+}
+
 .banner {
   background-image: url("../assets/images/bg-desktop-light.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   height: 300px;
+  width: 100%;
+  @media screen and (max-width: 515px) {
+    background-image: url('../assets/images/bg-mobile-light.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 300px;
+    width: 100%;
+  }
+}
+.banner_dark {
+  background-image: url('../assets/images/bg-desktop-dark.jpg');
+  height: 300px;
+  width: 100%;
+  @media screen and (max-width: 515px) {
+    background-image: url('../assets/images/bg-mobile-dark.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 300px;
+    width: 100%;
+  }
 }
 
 main {
   width: 500px;
   margin: 0 auto;
   margin-top: -216px;
+
+  @media screen and (max-width: 515px) {
+    width: 450px;
+  }
+  @media screen  and (max-width: 450px) {
+    width: 330px;
+  }
 
 
   header {
@@ -25,48 +66,63 @@ main {
   }
 
   & .input_form {
-    padding-top: 35px;
+    background-color: white;
+    margin: 34px 0;
+    border-radius: 5px;
     position: relative;
+    padding-left: 60px;
 
     label {
+      .allCompleted {
+        background-image: linear-gradient(-32deg, #9d00ffc9, #004effbf);
+        img {
+          margin-top: 8px;
+        }
+      }
       div {
         border: 1px solid #0000003d;
         border-radius: 50%;
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
         position: absolute;
-        top: 55px;
-        left: 15px;
+        top: 20px;
+        left: 25px;
         cursor: pointer;
         text-align: center;
-
         img {
           margin-top: 6px;
         }
       }
     }
-
-    input {
-      width: 84%;
-      padding: 20px 16px 20px 65px;
-      border-radius: 5px;
+    & input {
+      width: 90%;
+      padding: 20px 0;
+      padding-left: 20px;
       border: none;
-      font-size: 18px;
+      font-size: 25px;
+      background: white;
+      border-radius: 5px;
 
       &:focus {
-        border: none;
+        outline: none;
+        background-color: white;
       }
+      &::placeholder {
+        color: rgba(197, 195, 195, 0.363);
+      }
+    }
     }
   }
 
   .list_section {
     background-color: white;
     margin-top: 30px;
-    border-radius: 5px;
+    border-radius: 5px 5px 0 0;
     box-shadow: 0px 0px 30px 20px rgb(158 158 158 / 30%);
     ul {
+      border-radius: 5px 5px 0 0;
       li {
-        padding: 25px 0 25px 65px;
+        padding: 25px 0 25px 84px;
         border-bottom: 1px solid #80808052;
         position: relative;
         label {
@@ -76,37 +132,166 @@ main {
             width: 20px;
             height: 20px;
             position: absolute;
-            top: 52px;
-            left: 15px;
+            top: 22px;
+            left: 30px;
             cursor: pointer;
             position: absolute;
-            top: 23px;
             text-align: center;
             img {
               margin-top: 6px;
             }
           }
         }
+        .delete_todo {
+          position: absolute;
+          right: 25px;
+          top: 25px;
+          cursor: pointer;
+          display: none;
+          @media screen and (max-width: 515px) {
+            display: inline
+          }
+        }
+        &:hover {
+         .delete_todo {
+           display: inline;
+         }
+        }
+      }
+    }
+}
+
+.list_section_dark {
+  margin-top: 30px;
+  border-radius: 5px 5px 0 0;
+  border-radius: 5px;
+  ul {
+    border-radius: 5px 5px 0 0;
+    li {
+      padding: 25px 0 25px 84px;
+      border-bottom: 1px solid #80808052;
+      position: relative;
+      label {
+        div {
+          border: 1px solid #0000003d;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          top: 22px;
+          left: 30px;
+          cursor: pointer;
+          position: absolute;
+          text-align: center;
+          img {
+            margin-top: 6px;
+          }
+        }
+      }
+      .delete_todo {
+        position: absolute;
+        right: 25px;
+        top: 25px;
+        cursor: pointer;
+        display: none;
+        @media screen and (max-width: 515px) {
+          display: inline
+        }
+      }
+      &:hover {
+       .delete_todo {
+         display: inline;
+       }
       }
     }
   }
 }
+
 
 .footer {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   background-color: white;
+  border-radius: 0 0 5px 5px;
   padding: 16px 16px;
   box-shadow: 0px 25px 22px 10px rgb(158 158 158 / 15%);
+  position: relative;
+  a {
+    cursor: pointer;
+  }
 
   span {
     font-size: 0.7rem;
-    margin-right: 100px;
+    margin-right: auto;
   }
   ul {
     display: flex;
     margin-right: auto;
+    @media screen and (max-width: 450px) {
+      display: flex;
+      margin-right: auto;
+      position: absolute;
+      top: 90px;
+      left: 4px;
+      padding: 20px 10px;
+      background-color: white;
+      width: 68%;
+      padding-left: 92px;
+      box-shadow: 5px 20px 43px -16px;
+    }
+    & li {
+      margin-right: 15px;
+      font-size: 14px;
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+}
+.item_completed {
+  text-decoration: line-through;
+  color: rgba(128, 128, 128, 0.329);
+}
+
+.complete_check {
+  background-image: linear-gradient(-32deg, #9d00ffc9, #004effbf);
+}
+
+.footer_dark {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  background-color: rgb(20, 35, 40);
+  padding: 16px 16px;
+  border-radius: 0 0 5px 5px;
+  position: relative;
+  span {
+    font-size: 0.7rem;
+    margin-right: auto;
+  }
+  a {
+    cursor: pointer;
+  }
+  ul {
+    display: flex;
+    margin-right: auto;
+    @media screen and (max-width: 450px) {
+      display: flex;
+      margin-right: auto;
+      position: absolute;
+      top: 90px;
+      left: 4px;
+      padding: 20px 10px;
+      background-color: rgb(20, 35, 40);
+      width: 68%;
+      padding-left: 92px;
+    }
     & li {
       margin-right: 15px;
       font-size: 14px;

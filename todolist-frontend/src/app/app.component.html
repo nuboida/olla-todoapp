@@ -1,56 +1,56 @@
-<section class="todoapp">
-  <section class="banner">
+<section [class]="(darkMode$ | async) ? 'todoapp_dark' : 'todoapp'" [style.backgroundColor]="(darkMode$ | async) ? '#000000e6' : 'white' ">
+  <section [class]="(darkMode$ | async) ? 'banner_dark' : 'banner'">
   </section>
   <main class="main">
     <header>
       <h1>TODO</h1>
-      <div>
-        <img src="../assets/images/icon-moon.svg" />
+      <div (click)="toggleDarkMode()">
+        <img src="../assets/images/icon-moon.svg" *ngIf="!(darkMode$ | async)" />
+        <img src="../assets/images/icon-sun.svg" *ngIf="(darkMode$ | async)" />
       </div>
     </header>
-    <div class="input_form">
+    <div class="input_form" [style.backgroundColor]="(darkMode$ | async) ? '#142328' : 'white' ">
       <label for="text_form">
-        <div></div>
+        <div [style.border]="(darkMode$ | async) ? '2px solid rgba(197, 195, 195, 0.363)' : '2px solid #0000003d' "></div>
       </label>
-      <input type="text" name="text_form" id="text_form" placeholder="Create a new todo...">
+      <form [formGroup]="todoForm" (ngSubmit)="submitTodo(todoForm)">
+        <input
+          type="text"
+          name="text_form"
+          id="text_form"
+          placeholder="Create a new todo..."
+          formControlName="title"
+          [style.backgroundColor]="(darkMode$ | async) ? '#142328' : 'white' "
+          [style.color]="(darkMode$ | async) ? '#ffffffdb' : 'black'"
+          >
+      </form>
     </div>
-    <section class="list_section">
-      <ul>
-        <li>
-          <label><div></div></label>
-          Complete online Javascript course
-        </li>
-        <li>
-          <label><div></div></label>
-          Jog around the park 3x
-        </li>
-        <li>
-          <label><div></div></label>
-          10 minutes meditation
-        </li>
-        <li>
-          <label><div></div></label>
-          Read for 1 hour
-        </li>
-        <li>
-          <label><div></div></label>
-          Pick up groceries
-        </li>
-        <li>
-          <label><div></div></label>
-          Complete Todo App on Frontend Mentor
-        </li>
-
-      </ul>
+    <section [class]="(darkMode$ | async) ? 'list_section_dark' : 'list_section'">
+        <ul [style.backgroundColor]="(darkMode$ | async) ? '#142328' : 'white'">
+          <form [formGroup]="activeForm">
+            <li *ngFor="let todo of todos$ | async, let i=index" formArrayName="actives" [class]="activeForm.value.actives[i].complete ? 'item_completed' : ''">
+                <label>
+                  <div [class]="activeForm.value.actives[i].complete ? 'complete_check' : null" [style.border]="(darkMode$ | async) ? '2px solid rgba(197, 195, 195, 0.363)' : '2px solid #0000003d' " [formGroupName]="i">
+                    <img src="../assets/images/icon-check.svg" alt="check" />
+                      <input type="checkbox" class="toggle_complete" style="display:none;" formControlName="complete" [id]="todo.id" (change)="toggleActive($event)" [value]="activeForm.value.actives[i].complete">
+                  </div>
+                </label>
+                {{todo.title}}
+                <span class="delete_todo" (click)="deleteTodo(todo.id)">
+                  <img src="assets/images/icon-cross.svg" />
+                </span>
+            </li>
+          </form>
+        </ul>
     </section>
-    <footer class="footer">
-      <span class="todo-count"><strong>5</strong> items left</span>
+    <footer [class]="(darkMode$ | async) ? 'footer_dark' : 'footer'" *ngIf="noOfItems > 0" [style.backgroundColor]="(darkMode$ | async) ? '#142328' : 'white'">
+      <span class="todo-count"><strong>{{noOfItems}}</strong> items left</span>
       <ul>
-        <li><a>All</a></li>
+        <li><a style="color: cornflowerblue;">All</a></li>
         <li><a>Active</a></li>
         <li><a>Completed</a></li>
       </ul>
-      <button type="button" class="clear_completed">Clear Completed</button>
+      <a>Clear Completed</a>
     </footer>
   </main>
 </section>
