@@ -14,7 +14,7 @@ constructor(
 ) { }
 
 getTodos(): Observable<Todo[]> {
-  return this.http.get('http://localhost:5120/todos').pipe(
+  return this.http.get('/todos').pipe(
     map((data: any) => data || [])
   )
 }

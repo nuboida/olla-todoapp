@@ -1,0 +1,36 @@
+services:
+  frontend:
+    build:
+      context: "./todolist-frontend"
+      dockerfile: "./Dockerfile"
+    networks:
+      - todolist_net
+  backend:
+    build:
+      context: "./backend"
+      dockerfile: "./Dockerfile"
+    networks:
+      - todolist_net
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodbdata:/data/db
+    networks:
+      - todolist_net
+  proxy:
+    image: nginx:stable-alpine
+    environment:
+      - NGINX_ENVSUBST_TEMPLATE_SUFFIX=.conf
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 80:80
+    networks:
+      - todolist_net
+volumes:
+  mongodbdata:
+networks:
+  todolist_net:
