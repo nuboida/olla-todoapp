@@ -14,19 +14,19 @@ constructor(
 ) { }
 
 getTodos(): Observable<Todo[]> {
-  return this.http.get('/todos').pipe(
+  return this.http.get('/api/todos').pipe(
     map((data: any) => data || [])
   )
 }
 addTodo<T>(title: string): Observable<T> {
-  return this.http.post<T>('http://localhost:5120/todos', {title})
+  return this.http.post<T>('/api/todos', {title})
   }
 
 toggleComplete<T>(id: string): Observable<T> {
-  return this.http.post<T>(`http://localhost:5120/todos/${id}/active`, {});
+  return this.http.post<T>(`/api/todos/${id}/active`, {});
 }
 
 deleteTodo<T>(id: string): Observable<T> {
-  return this.http.delete<T>(`http://localhost:5120/todos/${id}`);
+  return this.http.delete<T>(`/api/todos/${id}`);
 }
 }

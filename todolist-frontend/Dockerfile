@@ -12,9 +12,9 @@ COPY . .
 # Build typescript
 RUN npm run build
 
-FROM nginx:stable-alpine
+FROM nginx:latest
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /usr/src/app/dist/todolist-frontend /usr/share/nginx/html
 
 EXPOSE 80
