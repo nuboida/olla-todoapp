@@ -107,5 +107,12 @@
       }
     }
   },
+<<<<<<< HEAD:todolist-frontend/angular.json
   "defaultProject": "todolist-frontend"
+=======
+  "defaultProject": "todoapp",
+  "cli": {
+    "analytics": false
+  }
+>>>>>>> 666c7ad0245179752cba4bf5cf31e4f8e8012e30:angular.json
 }
