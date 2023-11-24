@@ -9,8 +9,20 @@ services:
     build:
       context: ./backend
       dockerfile: ./Dockerfile
+    environment:
+      - MongoDbSettings:Host=db
     ports:
       - 5000:5000
+    networks:
+      - todolistnet
+  db:
+    image: mongo
+    volumes:
+      - type: bind
+        source: /var/lib/docker/volumes/mongodbdata/_data
+        target: /data/db
+    ports:
+      - 27017:27017
     networks:
       - todolistnet
   proxy:
