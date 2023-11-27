@@ -2,19 +2,17 @@
 FROM node:lts-alpine AS build
 WORKDIR /usr/src/app
 
-# install dependencies
-COPY package.json .
-COPY package-lock.json .
-RUN npm install
+RUN npm cache clean --force
 
 # Copy the application source
 COPY . .
+RUN npm install -g @angular/cli@17.0.3
+RUN npm install
 # Build typescript
-RUN npm run build
+RUN ng build
 
 FROM nginx:latest
-
-COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/dist/todolist-frontend /usr/share/nginx/html
+COPY --from=build ./usr/src/app/dist/todolist-frontend/browser /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

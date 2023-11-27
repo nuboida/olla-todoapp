@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { TodoService } from 'src/app/todo.service';
+import { TodoService } from '../../todo.service';
 import { addTodo, addTodoResponse, deleteTodo, deleteTodoResponse, fetchTodosResponse, loadTodos, toggleActive, toggleActiveResponse } from './todo.actions';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, mergeMap } from "rxjs/operators";
-import { Todo } from 'src/app/models/todo.model';
+import { Todo } from '../../models/todo.model';
 
 @Injectable({providedIn: 'root'})
 export class TodosEffect {
