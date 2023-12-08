@@ -3,6 +3,7 @@ services:
     build:
       context: ./todolist-frontend
       dockerfile: ./Dockerfile
+    image: nuboida/todolist-frontend
     ports:
       - 3000:3000
     networks:
@@ -11,6 +12,7 @@ services:
     build:
       context: ./backend
       dockerfile: ./Dockerfile
+    image: nuboida/todolist-backend
     environment:
       - MongoDbSettings:Host=db
     ports:
