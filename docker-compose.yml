@@ -21,10 +21,11 @@ services:
       - todolistnet
   db:
     image: mongo
-    volumes:
-      - type: bind
-        source: /var/lib/docker/volumes/mongodbdata/_data
-        target: /data/db
+    
+    #volumes:
+     # - type: bind
+      #  source: /var/lib/docker/volumes/mongodbdata/_data
+       # target: /data/db
     ports:
       - 27017:27017
     networks:
